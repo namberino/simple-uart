@@ -24,9 +24,16 @@ module uart_rx_tb();
     initial begin
         // pulse reset signal
         rst = 1;
-        rx_bit_in = 0;
+        rx_bit_in = 1;
         #1
         rst = 0;
+        #5
+
+        
+        rx_bit_in = 0;
+        #2
+
+        // test data 1
         rx_bit_in = 1;
         #2
         rx_bit_in = 0;
@@ -42,6 +49,30 @@ module uart_rx_tb();
         rx_bit_in = 0;
         #2
         rx_bit_in = 0;
+        #2
+
+        rx_bit_in = 1;
+        #2
+        rx_bit_in = 0;
+        #2
+
+        // test data 2
+        rx_bit_in = 0;
+        #2
+        rx_bit_in = 1;
+        #2
+        rx_bit_in = 1;
+        #2
+        rx_bit_in = 1;
+        #2
+        rx_bit_in = 0;
+        #2
+        rx_bit_in = 0;
+        #2
+        rx_bit_in = 1;
+        #2
+        rx_bit_in = 1;
+        
         #10
         rst = 1;
     end

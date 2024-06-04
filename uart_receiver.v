@@ -10,6 +10,7 @@ module uart_receiver (
     reg[3:0] bit_counter = 0;
     wire[7:0] output_next;
     reg received_data;
+    reg start_bit_on;
 
     always @ (posedge clk or posedge rst)
     begin
@@ -18,6 +19,7 @@ module uart_receiver (
             shift_reg <= 0;
             received_data <= 0;
             bit_counter <= 0;
+            start_bit_on <= 0;
         end else
         begin
             if (received_data)
@@ -25,10 +27,15 @@ module uart_receiver (
                 bit_counter <= 0;
                 received_data <= 0;
                 shift_reg <= 0;
-            end else
+                start_bit_on <= 0;
+            end else if (start_bit_on)
             begin
                 shift_reg <= output_next;
                 bit_counter <= bit_counter + 1'b1;
+            end else
+            begin
+                if (bit_in == 0)
+                    start_bit_on <= 1;
             end
         end
     end
