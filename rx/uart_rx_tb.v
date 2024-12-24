@@ -31,7 +31,7 @@ module uart_rx_tb();
         rst = 0;
         #5
 
-        
+        // set start bit
         rx_bit_in = 0;
         #2
 
@@ -53,8 +53,11 @@ module uart_rx_tb();
         rx_bit_in = 0;
         #2
 
+        // set end bit
         rx_bit_in = 1;
         #2
+
+        // set start bit
         rx_bit_in = 0;
         #2
 
@@ -75,6 +78,7 @@ module uart_rx_tb();
         #2
         rx_bit_in = 1;
         
+        // set end bit
         #10
         rst = 1;
     end
